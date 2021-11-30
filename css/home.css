@@ -1,0 +1,130 @@
+/* Common CSS */
+* { box-sizing: border-box; }
+body { font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif; }
+
+/* Login CSS */
+.main-container {
+    max-width: 672px;
+    width: 35%;
+    margin: 20px auto;
+}
+
+.main-container > form > * { margin-bottom: 30px; }
+.main-container > form > *:last-child { margin-bottom: 0; }
+
+.main-container h1 {
+    color: rgba(34, 95, 171, 1);
+    font-size: 34px;
+    font-weight: bold;
+    text-align: center;
+}
+
+.main-container li { margin-bottom: 25px; }
+.main-container li:last-child { margin-bottom: 0; }
+
+.main-container li > * {
+    width: 100%;
+    margin-bottom: 15px;
+    display: block;
+    color: rgba(98, 154, 218, 1);
+    font-size: 20px;
+}
+
+.main-container li > *:last-child { margin-bottom: 0; }
+
+.main-container li > label { 
+    font-weight: bold;
+    text-transform: capitalize; 
+}
+
+.main-container li > input { 
+    padding: 10px 20px;
+    border: 2px solid rgba(98, 154, 218, 1);
+    outline: none;
+}
+
+.main-container li > input::placeholder { color: rgba(98, 154, 218, 1); }
+.main-container li > input:focus { border: 2px solid rgba(34, 95, 171, 1); }
+
+.error-message > span {
+    color: rgba(255, 0, 0, 1);
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.error-message > span::before {
+    content: "\f057";
+    margin-right: 5px;
+    color: rgba(255, 0, 0, 1);
+    font-family: "Font Awesome 5 Free";
+    font-size: 20px;
+    font-weight: 900;
+}
+
+.error-message > span.valid { color: rgba(34, 95, 171, 1); }
+
+.error-message > span.valid::before {
+    content: "\f058";
+    color: rgba(34, 95, 171, 1);
+}
+
+.error-message.display-none { display: none; }
+
+.main-container button {
+    padding: 10px 25px;
+    border: none;
+    border-radius: 5px;
+    margin: 0 auto;
+    display: block;
+    background: rgba(34, 95, 171, 1);
+    color: #fff;
+    font-size: 22px;
+    font-weight: bold;
+    text-transform: uppercase;
+    transition: background 1s ease-in-out, color 1s ease-in-out;
+}
+
+.main-container button:hover { 
+    background: rgba(98, 154, 218, 1);
+    color: rgba(34, 95, 171, 1);
+    cursor: pointer;
+}
+
+/* CSS for 768px to 1023px Width */
+@media only screen and (max-width: 1023px) {
+    .main-container {
+        width: 40%;
+        margin: 15px auto;
+    }
+}
+
+/* CSS for Mobile Width */
+@media only screen and (max-width: 767px) {
+    .main-container {
+        max-width: unset;
+        width: 96%;
+        margin: 10px 2%;
+    }
+
+    .main-container > form > * { margin-bottom: 20px; }
+    .main-container h1 { font-size: 20px; }
+    .main-container li { margin-bottom: 15px; }
+
+    .main-container li > * {
+        margin-bottom: 10px;
+        font-size: 14px;
+    }
+
+    .main-container li > input { 
+        padding: 5px 10px;
+        border: 2px solid rgba(98, 154, 218, 1);
+    }
+
+    .error-message > span { font-size: 14px; }
+    .error-message > span::before { font-size: 14px; }
+
+    .main-container button {
+        padding: 5px 10px;
+        font-size: 16px;
+    }
+}
