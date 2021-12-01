@@ -209,11 +209,10 @@ nav li.selected > a {
     position: relative;
 }
 
-/* .carousel.display-none { display: none; } */
+.carousel.display-none { display: none; }
 
 .carousel > ul {
     width: 100%;
-    display: block;
     overflow: hidden;
     white-space: nowrap;
 }
@@ -280,6 +279,8 @@ nav li.selected > a {
     justify-content: center;
 }
 
+.carousel-buttons.display-none { display: none; }
+
 .carousel-buttons > li { 
     height: 10px;
     margin-right: 10px;
@@ -320,7 +321,7 @@ nav li.selected > a {
     gap: 20px;
 }
 
-/* #pokedex-main-container > .pokemons.display-none { display: none; } */
+#pokedex-main-container > .pokemons.display-none { display: none; }
 
 #pokedex-main-container > .pokemons > li {
     padding: 20px;
