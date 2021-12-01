@@ -328,7 +328,7 @@ nav li.selected > a {
 
     #pokedex-main-container > .pokemons > li {
         padding: 5px;
-        border-radius: 10px;
+        border-radius: 8px;
         box-shadow: 0 2px 5px rgba(100, 100, 100, 0.5);
         flex-basis: 110px;
         transition: background 1s ease-in-out;
