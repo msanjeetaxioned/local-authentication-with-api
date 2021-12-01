@@ -1,8 +1,61 @@
 /* Common CSS */
 * { box-sizing: border-box; }
-body { font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif; }
+body { font-family: 'Lato', sans-serif; }
 
-/* Login CSS */
+body#generation {
+    background: #efefbb;
+    background: linear-gradient(to right, #d4d3dd, #efefbb);
+    color: #000;
+    font-family: 'Lato', sans-serif;
+}
+
+body#generation .wrapper {
+    max-width: 1060px;
+    width: 100%;
+    margin: 0 auto;
+}
+
+a {
+    text-decoration: none;
+    color: unset;
+}
+
+.display-none { display: none; }
+
+.round { 
+    width: 100%;
+    height: 120px;
+    border-radius: 50%;
+    margin-bottom: 20px;
+    display: inline-block;
+    background: rgba(255, 255, 255, 0.6);
+}
+
+.pokedex-number {
+    padding: 5px 10px;
+    border-radius: 10px;
+    margin-bottom: 15px;
+    display: inline-block;
+    background-color: rgba(0, 0, 0, 0.1);
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.pokemon-name {
+    margin-bottom: 20px;
+    font-size: 18px;
+    font-weight: bold;
+    letter-spacing: 1px;
+    text-transform: capitalize;
+}
+
+.pokemon-info-class { 
+    font-size: 14px;
+    font-weight: bold;
+    text-transform: capitalize;
+}
+
+/* Login Page CSS Start */
 .main-container {
     max-width: 672px;
     width: 35%;
@@ -89,6 +142,208 @@ body { font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Luci
     color: rgba(34, 95, 171, 1);
     cursor: pointer;
 }
+/* Login Page CSS End */
+
+/* Generation Page CSS Start */
+#generation > header > .wrapper {
+    padding: 10px 10px 10px 0;
+    display: flex;
+    background: rgba(34, 95, 171, 0.3);
+    flex-direction: column;
+    align-items: flex-end;
+}
+
+.header-content > p {
+    margin-bottom: 10px;
+    display: block;
+    color: rgba(34, 95, 171, 1);
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.header-content li > a {
+    padding: 5px 10px;
+    border-radius: 5px;
+    display: inline-block;
+    background: rgba(34, 95, 171, 1);
+    color: #fff;
+    font-size: 14px;
+    font-weight: bold;
+    text-transform: uppercase;
+    transition: background 1s ease-in-out, color 1s ease-in-out;
+}
+
+.header-content li > a:hover { 
+    background: #fff;
+    color: rgba(34, 95, 171, 1);
+}
+
+#pokedex-main-container { text-align: center; }
+#pokedex-main-container > * { margin-bottom: 30px; }
+#pokedex-main-container > *:last-child { margin-bottom: 0; }
+nav { background: rgba(98, 154, 218, 1) }
+nav > ul { display: flex; }
+nav li { flex: 1; }
+
+nav a {
+    padding: 10px 0;
+    display: block;
+    color: rgba(34, 95, 171, 1);
+    font-size: 20px;
+    font-weight: bold;
+    transition: background 1s ease-in-out, color 1s ease-in-out;
+}
+
+nav a:hover {
+    background: rgba(34, 95, 171, 1);
+    color: #fff;
+}
+
+nav li.selected > a {
+    background: rgba(34, 95, 171, 1);
+    color: #fff;
+}
+
+.carousel { 
+    width: 100%; 
+    position: relative;
+}
+
+.carousel.display-none { display: none; }
+
+.carousel > ul {
+    width: 100%;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.carousel > .control-button {
+    display: inline-block;
+    position: absolute;
+    top: 50%;
+    font-size: 0;
+    transform: translate(0, -50%);
+}
+
+.carousel > .control-button::before {
+    display: flex;
+    color: rgba(98, 154, 218, 1);
+    font-family: "Font Awesome 5 Free";
+    font-size: 24px;
+    font-weight: 900;
+    align-items: center;
+    justify-content: center;
+    transition: color 1s ease-in-out;
+}
+
+.carousel > .control-button:hover::before { 
+    color: rgba(34, 95, 171, 1);
+    cursor: pointer;
+}
+
+.carousel > .previous-button { left: 0; }
+
+.carousel > .previous-button::before {
+    content: "\f137";
+    margin-right: 20px;
+}
+
+.carousel > .next-button { right: 0; }
+
+.carousel > .next-button::before {
+    content: "\f138";
+    margin-left: 20px;
+}
+
+.carousel li {
+    width: 100%;
+    display: inline-block;
+}
+
+.carousel li > figure { width: 100%; }
+
+.carousel figure > img {
+    max-width: 200px;
+    width: 100%;
+    max-height: 200px;
+    height: 100%;
+    margin: 0 auto;
+    display: block;
+    object-fit: contain;
+}
+
+.carousel-buttons {
+    width: 100%;
+    height: 10px;
+    display: flex;
+    justify-content: center;
+}
+
+.carousel-buttons.display-none { display: none; }
+
+.carousel-buttons > li { 
+    height: 10px;
+    margin-right: 10px;
+    display: inline-block;
+}
+
+.carousel-buttons > li:last-child { margin-right: 0; }
+
+.carousel-buttons > li > span {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    display: block;
+    background: rgba(0, 0, 0, 0.25);
+    font-size: 0;
+    transition: background 1s ease-in-out;
+}
+
+.carousel-buttons > li > span:hover { 
+    background: rgba(34, 95, 171, 1);
+    cursor: pointer;
+}
+
+.carousel-buttons > li > span.selected { background: rgba(34, 95, 171, 1); }
+
+#pokedex-main-container > h1 {
+    font-size: 32px;
+    font-weight: bold;
+    letter-spacing: 3px;
+    text-transform: capitalize;
+}
+
+#pokedex-main-container > .pokemons {
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+#pokedex-main-container > .pokemons.display-none { display: none; }
+
+#pokedex-main-container > .pokemons > li {
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 3px 15px rgba(100, 100, 100, 0.5);
+    flex-basis: 160px;
+    transition: background 1s ease-in-out;
+}
+
+#pokedex-main-container > .pokemons > li:hover {
+    background: rgba(34, 95, 171, 1);;
+    cursor: pointer;
+}
+/* Generation Page CSS End */
+
+/* CSS for < 1080px Width */
+@media only screen and (max-width: 1079px) {
+    body#generation > .wrapper {
+        width: 97%;
+        margin: 0 1.5%;
+    }
+}
 
 /* CSS for 768px to 1023px Width */
 @media only screen and (max-width: 1023px) {
@@ -127,4 +382,55 @@ body { font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Luci
         padding: 5px 10px;
         font-size: 16px;
     }
+
+    /* Generation Page CSS Start */
+    .round { 
+        height: 100px;
+        margin-bottom: 10px;
+    }
+
+    .pokedex-number {
+        padding: 5px 10px;
+        border-radius: 10px;
+        margin-bottom: 10px;
+    }
+    
+    .pokemon-name {
+        margin-bottom: 10px;
+        font-size: 16px;
+    }
+    
+    body#generation > .wrapper {
+        width: 98%;
+        margin: 0 1%;
+    }
+
+    .header-content > p { font-size: 16px; }
+    #pokedex-main-container { margin-bottom: 10px; }
+    #pokedex-main-container > * { margin-bottom: 15px; }
+
+    nav a {
+        padding: 5px 0;
+        font-size: 16px;
+    }
+
+    #pokedex-main-container > h1 {
+        font-size: 20px;
+        letter-spacing: 2px;
+    }
+    
+    #pokedex-main-container > .pokemons {
+        margin-bottom: 10px;
+        gap: 5px;
+        justify-content: center;
+    }
+
+    #pokedex-main-container > .pokemons > li {
+        padding: 5px;
+        border-radius: 8px;
+        box-shadow: 0 2px 5px rgba(100, 100, 100, 0.5);
+        flex-basis: 110px;
+        transition: background 1s ease-in-out;
+    }
+    /* Generation Page CSS End */
 }
