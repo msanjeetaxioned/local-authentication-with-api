@@ -15,10 +15,6 @@ document.addEventListener('DOMContentLoaded', function(event) {
     localStorage.setItem("tejeshs", 1234);
 
     form.addEventListener("submit", function(event) {
-        if(!formSubmittedOnce) {
-            errorMessage.classList.remove("display-none");
-            formSubmittedOnce = true;
-        }
         if(checkIfInputPresent(userName)) {
             if(checkIfInputPresent(password)) {
                 if(validateLoginInfo(userName, password)) {
@@ -26,16 +22,26 @@ document.addEventListener('DOMContentLoaded', function(event) {
                 }
                 else {
                     event.preventDefault();
+                    onFirstIncorrectSubmit();
                 }
             }
             else {
                 event.preventDefault();
+                onFirstIncorrectSubmit();
             }
         }
         else {
             event.preventDefault();
+            onFirstIncorrectSubmit();
         }
     });
+
+    function onFirstIncorrectSubmit() {
+        if(!formSubmittedOnce) {
+            errorMessage.classList.remove("display-none");
+            formSubmittedOnce = true;
+        }
+    }
 
     function checkIfInputPresent(inputField) {
         let value = inputField.value;
