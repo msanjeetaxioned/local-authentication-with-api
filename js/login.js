@@ -11,6 +11,8 @@ document.addEventListener('DOMContentLoaded', function(event) {
     const userName = form["user-name"];
     const password = form["password"];
     let formSubmittedOnce = false;
+    localStorage.setItem("sanjeetm", 12345);
+    localStorage.setItem("tejeshs", 1234);
 
     form.addEventListener("submit", function(event) {
         if(!formSubmittedOnce) {
@@ -20,7 +22,7 @@ document.addEventListener('DOMContentLoaded', function(event) {
         if(checkIfInputPresent(userName)) {
             if(checkIfInputPresent(password)) {
                 if(validateLoginInfo(userName, password)) {
-                    
+                    localStorage.setItem("user-name", userName.value);
                 }
                 else {
                     event.preventDefault();
