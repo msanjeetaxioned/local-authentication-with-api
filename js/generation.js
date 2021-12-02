@@ -144,9 +144,11 @@ document.addEventListener('DOMContentLoaded', function(event) {
             let li = document.createElement("li");
             li.setAttribute("data-number", i);
             li.classList.add(results[i].type);
-            // li.addEventListener("click", function() {
-                
-            // });
+            li.addEventListener("click", function() {
+                const clickedPokemonId = parseInt(this.getAttribute("data-number"));
+                localStorage.setItem("pokemon-id", clickedPokemonId);
+                console.log(localStorage.getItem("pokemon-id"));
+            });
             const {name, id, type, front_image} = results[i];
             const html = `
                 <div class="round" style="background-image: url('${front_image}')"></div>
