@@ -27,8 +27,11 @@ a {
     height: 120px;
     border-radius: 50%;
     margin-bottom: 20px;
-    display: inline-block;
-    background: rgba(255, 255, 255, 0.6);
+    display: block;
+    background: rgba(255, 255, 255, 0.6); 
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
 }
 
 .pokedex-number {
@@ -331,8 +334,27 @@ nav li.selected > a {
     transition: background 1s ease-in-out;
 }
 
+.normal { background: #a8a77a; }
+.fire { background: #EE8130; }
+.water { background: #6390F0; }
+.electric { background: #F7D02C; }
+.grass { background: #7AC74C; }
+.ice { background: #96D9D6; }
+.fighting { background: #C22E28; }
+.poison { background: #A33EA1; }
+.ground { background: #E2BF65; }
+.flying { background: #A98FF3; }
+.psychic { background: #F95587; }
+.bug { background: #A6B91A; }
+.rock { background: #B6A136; }
+.ghost { background: #735797; }
+.dragon { background: #6F35FC; }
+.dark { background: #705746; }
+.steel { background: #B7B7CE; }
+.fairy { background: #D685AD; }
+
 #pokedex-main-container > .pokemons > li:hover {
-    background: rgba(34, 95, 171, 1);;
+    background: rgba(34, 95, 171, 1);
     cursor: pointer;
 }
 /* Generation Page CSS End */
