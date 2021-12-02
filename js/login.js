@@ -1,24 +1,41 @@
 document.addEventListener('DOMContentLoaded', function(event) {
-    const fieldNames = ["User Name", "Password"];
-    const errors = [
-        "Enter ",
-        "Invalid User name and/or Password"
-    ];
     const mainContainer = document.querySelector(".main-container");
     const form = mainContainer.querySelector("form");
     const errorMessage = form.querySelector(".error-message");
     const spanErrorMessage = errorMessage.querySelector(".error-message > span");
     const userName = form["user-name"];
     const password = form["password"];
-    let formSubmittedOnce = false;
-    localStorage.setItem("sanjeetm", 12345);
-    localStorage.setItem("tejeshs", 1234);
+    const fieldNames = ["User Name", "Password"];
+    const errors = [
+        "Enter ",
+        "Invalid User name and/or Password"
+    ];
+    const validUserNames = [
+        {name: "sanjeetm", password: 12345},
+        {name: "tejeshs", password: 1234}
+    ];
 
-    form.addEventListener("submit", function(event) {
-        if(checkIfInputPresent(userName)) {
-            if(checkIfInputPresent(password)) {
-                if(validateLoginInfo(userName, password)) {
-                    localStorage.setItem("user-name", userName.value);
+    let formSubmittedOnce = false;
+
+    if(localStorage.getItem("user-name")) {
+        window.location.replace("http://127.0.0.1:5500/generation.html");
+    }
+    else {
+        showLoginForm(); // User hasn't Logged in
+    }
+
+    function showLoginForm() {
+        form.addEventListener("submit", function(event) {
+            if(checkIfInputPresent(userName)) {
+                if(checkIfInputPresent(password)) {
+                    if(validateLoginInfo(userName, password)) {
+                        event.preventDefault();
+                        window.location.replace("http://127.0.0.1:5500/generation.html");
+                    }
+                    else {
+                        event.preventDefault();
+                        onFirstIncorrectSubmit();
+                    }
                 }
                 else {
                     event.preventDefault();
@@ -29,12 +46,8 @@ document.addEventListener('DOMContentLoaded', function(event) {
                 event.preventDefault();
                 onFirstIncorrectSubmit();
             }
-        }
-        else {
-            event.preventDefault();
-            onFirstIncorrectSubmit();
-        }
-    });
+        });
+    }
 
     function onFirstIncorrectSubmit() {
         if(!formSubmittedOnce) {
@@ -58,6 +71,7 @@ document.addEventListener('DOMContentLoaded', function(event) {
     function validateLoginInfo(userName, password) {
         let value = userName.value;
         if(localStorage.getItem(value) == password.value) {
+            localStorage.setItem("user-name", value);
             return true;
         }
         spanErrorMessage.innerText = errors[1];
