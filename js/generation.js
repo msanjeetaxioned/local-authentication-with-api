@@ -1,7 +1,13 @@
 document.addEventListener('DOMContentLoaded', function(event) {
+    const body = document.querySelector("body");
+    const pokedexMainContainer = body.querySelector("#pokedex-main-container");
     const generations = [151, 251, 386, 493, 649, 721, 809];
     let gen = 0;
     let results = [];
+
+    // Carousel Items
+    const totalItems = 6;
+    let currentItem = 0;
 
     // Check If Some User is already Logged in
     if(localStorage.getItem("user-name")) {
@@ -12,11 +18,9 @@ document.addEventListener('DOMContentLoaded', function(event) {
     }
 
     function userhasLoggedIn() {
-        const body = document.querySelector("body");
         const headerContent = body.querySelector(".header-content");
         const usernameInHeader = headerContent.querySelector("p");
         const signOut = headerContent.querySelector("a");
-        const pokedexMainContainer = body.querySelector("#pokedex-main-container");
         const generationsLis = pokedexMainContainer.querySelectorAll("nav li");
         const h1 = pokedexMainContainer.querySelector("h1");
 
@@ -54,11 +58,40 @@ document.addEventListener('DOMContentLoaded', function(event) {
             });
         }
 
+        const previousButton = pokedexMainContainer.querySelector(".previous-button");
+        const nextButton = pokedexMainContainer.querySelector(".next-button");
+        const ul = pokedexMainContainer.querySelector(".carousel > ul");
+        const liList = pokedexMainContainer.querySelectorAll(".carousel li");
+        const carouselDotsArray = pokedexMainContainer.querySelectorAll(".carousel-buttons span");
+
+        document.addEventListener("keydown", function(event) {
+            if(event.key === "ArrowLeft") {
+                changeDisplayedItem(ul, liList, carouselDotsArray, true, -1);
+            }
+            else if(event.key === "ArrowRight") {
+                changeDisplayedItem(ul, liList, carouselDotsArray, true, 1);
+            }
+        })
+
+        previousButton.addEventListener("click", function() {
+            changeDisplayedItem(ul, liList, carouselDotsArray, true, -1);
+        });
+
+        nextButton.addEventListener("click", function() {
+            changeDisplayedItem(ul, liList, carouselDotsArray, true, 1);
+        });
+
+        for(let carouselDot of carouselDotsArray) {
+            carouselDot.addEventListener("click", function() {
+                changeDisplayedItem(ul, liList, carouselDotsArray, false, parseInt(this.getAttribute("data-id")));
+            });
+        }
+
         changeGenerationHeading(h1);
         getPokemons(pokedexMainContainer);
     }
 
-    function changeGenerationHeading() {
+    function changeGenerationHeading(h1) {
         h1.classList.remove("display-none");
         h1.innerText = "Generation " + (gen+1);
     }
@@ -89,7 +122,8 @@ document.addEventListener('DOMContentLoaded', function(event) {
                 results[id].type = response.types[0].type.name;
                 results[id].front_image = response.sprites.front_default;
                 ++ajaxCount;
-                if(ajaxCount >= totalPokemons) {
+                if(ajaxCount == totalPokemons) {
+                    setImagesOfCarousel(start);
                     displayData(start, end, pokedexMainContainer);
                 }
             }
@@ -99,8 +133,11 @@ document.addEventListener('DOMContentLoaded', function(event) {
     function displayData(start, end, pokedexMainContainer) {
         console.log(results);
         console.log("Ajax complete");
+        let carousel = pokedexMainContainer.querySelector(".carousel");
+        let carouselButtons = pokedexMainContainer.querySelector(".carousel-buttons");
         let ul = pokedexMainContainer.querySelector(".pokemons");
-
+        let carouselUl = carousel.querySelector("ul");
+        let liList = carouselUl.querySelectorAll("li");
         ul.innerHTML = "";
 
         for(let i = start; i <= end; i++) {
@@ -111,16 +148,69 @@ document.addEventListener('DOMContentLoaded', function(event) {
                 
             // });
             const {name, id, type, front_image} = results[i];
-            const item = `
+            const html = `
                 <div class="round" style="background-image: url('${front_image}')"></div>
                 <p class="pokedex-number">#00${id}</p>
                 <p class="pokemon-name">${name}</p>
                 <p class="pokemon-main-type">Type: ${type}</p>
                 `;
-            li.innerHTML = item;
+            li.innerHTML = html;
             ul.appendChild(li);
         }
 
         ul.classList.remove("display-none");
+        carousel.classList.remove("display-none");
+        carouselButtons.classList.remove("display-none");
+
+        // carouselUl.appendChild(liList[0].cloneNode(true));
+        // carouselUl.insertBefore(liList[liList.length-1].cloneNode(true), liList[0]);
+    }
+
+    function setImagesOfCarousel(start) {
+        const liList = pokedexMainContainer.querySelectorAll(".carousel li");
+        for(let li of liList) {
+            let img = li.querySelector("img");
+            img.setAttribute("src", results[start++].front_image);
+        }
+        
+    }
+
+    function changeDisplayedItem(ul, liList, carouselDotsArray,onNextPrevClick, number) {
+        liList[currentItem].classList.remove("selected");
+        carouselDotsArray[currentItem].classList.remove("selected");
+        if(onNextPrevClick) {
+            if(currentItem == 0 && number == -1) {
+                currentItem = totalItems + 1;
+            }
+            else if(currentItem == (totalItems-1) && number == 1) {
+                currentItem = 0;
+            }
+            else {
+                currentItem = currentItem + number;
+            }
+        }
+        else {
+            currentItem = number;
+        }
+        liList[currentItem].classList.add("selected");
+        carouselDotsArray[currentItem].classList.add("selected");
+        horizontalScrollToElement(ul, liList[currentItem].offsetLeft, 400);
+    }
+
+    function horizontalScrollToElement(scrollLayer, destination, duration) {
+        if (duration <= 0) {
+            return;
+        }
+        const difference = destination - scrollLayer.scrollLeft - 50;
+        const perTick = (difference / duration) * 10;
+    
+        let timeout = setTimeout(function() {
+            scrollLayer.scrollLeft = scrollLayer.scrollLeft + perTick;
+            if (scrollLayer.scrollLeft === destination) {
+                clearTimeout(timeout);
+                return;
+            }
+            horizontalScrollToElement(scrollLayer, destination, duration - 10);
+        }, 10);
     }
 });
