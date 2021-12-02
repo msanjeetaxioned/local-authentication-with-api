@@ -17,6 +17,7 @@ document.addEventListener('DOMContentLoaded', function(event) {
 
     let formSubmittedOnce = false;
 
+    // Check If Some User is already Logged in
     if(localStorage.getItem("user-name")) {
         window.location.replace("http://127.0.0.1:5500/generation.html");
     }

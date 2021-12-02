@@ -3,6 +3,7 @@ document.addEventListener('DOMContentLoaded', function(event) {
     let gen = 0;
     let results = [];
 
+    // Check If Some User is already Logged in
     if(localStorage.getItem("user-name")) {
         userhasLoggedIn();
     }
@@ -17,6 +18,7 @@ document.addEventListener('DOMContentLoaded', function(event) {
         const signOut = headerContent.querySelector("a");
         const pokedexMainContainer = body.querySelector("#pokedex-main-container");
         const generationsLis = pokedexMainContainer.querySelectorAll("nav li");
+        const h1 = pokedexMainContainer.querySelector("h1");
 
         usernameInHeader.innerText = "Hello! " + localStorage.getItem("user-name");
         signOut.addEventListener("click", function() {
@@ -33,6 +35,7 @@ document.addEventListener('DOMContentLoaded', function(event) {
                     generationsLis[gen].classList.remove("selected");
                     generationsLis[genClicked].classList.add("selected");
                     gen = genClicked;
+                    changeGenerationHeading(h1);
                     if(results[generations[genClicked]]) {
                         let start;
                         if(gen == 0) {
@@ -51,7 +54,13 @@ document.addEventListener('DOMContentLoaded', function(event) {
             });
         }
 
+        changeGenerationHeading(h1);
         getPokemons(pokedexMainContainer);
+    }
+
+    function changeGenerationHeading() {
+        h1.classList.remove("display-none");
+        h1.innerText = "Generation " + (gen+1);
     }
 
     function getPokemons(pokedexMainContainer) {
@@ -98,9 +107,9 @@ document.addEventListener('DOMContentLoaded', function(event) {
             let li = document.createElement("li");
             li.setAttribute("data-number", i);
             li.classList.add(results[i].type);
-            li.addEventListener("click", function() {
+            // li.addEventListener("click", function() {
                 
-            });
+            // });
             const {name, id, type, front_image} = results[i];
             const item = `
                 <div class="round" style="background-image: url('${front_image}')"></div>
