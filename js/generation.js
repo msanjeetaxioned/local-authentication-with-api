@@ -180,7 +180,7 @@ document.addEventListener('DOMContentLoaded', function(event) {
         carouselDotsArray[currentItem].classList.remove("selected");
         if(onNextPrevClick) {
             if(currentItem == 0 && number == -1) {
-                currentItem = totalItems + 1;
+                currentItem = totalItems - 1;
             }
             else if(currentItem == (totalItems-1) && number == 1) {
                 currentItem = 0;
