@@ -199,11 +199,12 @@ body#pokemon {
 #pokedex-main-container { text-align: center; }
 #pokedex-main-container > * { margin-bottom: 30px; }
 #pokedex-main-container > *:last-child { margin-bottom: 0; }
-nav { background: rgba(98, 154, 218, 1) }
-nav > ul { display: flex; }
-nav li { flex: 1; }
+.generation-nav { background: rgba(98, 154, 218, 1) }
+.generation-nav > .hamburger-mobile { display: none; }
+.generation-nav > ul { display: flex; }
+.generation-nav li { flex: 1; }
 
-nav a {
+.generation-nav a {
     padding: 10px 0;
     display: block;
     color: rgba(34, 95, 171, 1);
@@ -212,12 +213,12 @@ nav a {
     transition: background 1s ease-in-out, color 1s ease-in-out;
 }
 
-nav a:hover {
+.generation-nav a:hover {
     background: rgba(34, 95, 171, 1);
     color: #fff;
 }
 
-nav li.selected > a {
+.generation-nav li.selected > a {
     background: rgba(34, 95, 171, 1);
     color: #fff;
 }
@@ -379,7 +380,7 @@ nav li.selected > a {
 #pokemon-container > *:last-child { margin-bottom: 0; }
 
 #pokemon-container > h1 {
-    color: #000;
+    color: rgba(34, 95, 171, 1);
     font-size: 28px;
     font-weight: bold;
     text-transform: capitalize;
@@ -452,7 +453,7 @@ nav li.selected > a {
 
 /* CSS for < 1080px Width */
 @media only screen and (max-width: 1079px) {
-    body#generation > .wrapper {
+    body#generation .wrapper {
         width: 97%;
         margin: 0 1.5%;
     }
@@ -518,7 +519,7 @@ nav li.selected > a {
         font-size: 16px;
     }
     
-    body#generation > .wrapper {
+    body#generation .wrapper {
         width: 98%;
         margin: 0 1%;
     }
@@ -527,9 +528,31 @@ nav li.selected > a {
     #pokedex-main-container { margin-bottom: 10px; }
     #pokedex-main-container > * { margin-bottom: 15px; }
 
-    nav a {
-        padding: 5px 0;
+    .generation-nav > .hamburger-mobile { 
+        padding: 5px;
+        display: block;
+        font-size: 0;
+        text-align: left;
+    }
+
+    .generation-nav > .hamburger-mobile::before {
+        content: "\f0c9";
+        display: inline-block;
+        color: #fff;
+        font-family: "Font Awesome 5 Free";
+        font-size: 18px;
+        font-weight: 900;
+        transition: color 1s ease-in-out;
+    }
+
+    .generation-nav > .hamburger-mobile:hover::before { color: rgba(34, 95, 171, 1); }
+    .generation-nav > ul { display: none; }
+    .generation-nav > ul.display-block-for-mobile-only { display: block; }
+
+    .generation-nav a {
+        padding: 5px;
         font-size: 16px;
+        text-align: left;
     }
 
     #pokedex-main-container > h1 {
