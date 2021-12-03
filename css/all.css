@@ -58,6 +58,21 @@ a {
     text-transform: capitalize;
 }
 
+body#pokemon {
+    width: 100%;
+    min-height: 100vh;
+}
+
+#pokemon-container.wrapper {
+    max-width: 760px;
+    padding: 15px 0;
+    margin: 0 auto;
+    display: block;
+    text-align: center;
+}
+
+#pokemon-container.display-none { display: none; }
+
 /* Login Page CSS Start */
 .main-container {
     max-width: 672px;
@@ -359,6 +374,80 @@ nav li.selected > a {
 }
 /* Generation Page CSS End */
 
+/* Pokemon Page CSS Start */
+#pokemon-container > * { margin-bottom: 20px; }
+#pokemon-container > *:last-child { margin-bottom: 0; }
+
+#pokemon-container > h1 {
+    color: #000;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+#pokemon-container img {
+    max-width: 160px;
+    width: 100%;
+    max-height: 160px;
+    height: 100%;
+    margin: 0 auto;
+    display: block;
+    object-fit: contain;
+}
+
+#pokemon-container > p { font-size: 14px; }
+
+#pokemon-container > .additional-info > span {
+    margin-bottom: 10px;
+    display: block;
+    color: #000;
+    font-size: 18px;
+}
+
+#pokemon-container > .additional-info small {
+    display: inline;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+#pokemon-container > .stats > h2 {
+    margin-bottom: 15px;
+    color: #000;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+#pokemon-container > .stats > ul {
+    border: 2px solid #000;
+    display: flex;
+}
+
+#pokemon-container > .stats li { 
+    border-right: 2px solid #000;
+    display: flex;
+    flex-direction: column;
+    flex: 1; 
+}
+
+#pokemon-container > .stats li:last-child { border-right: none; }
+
+#pokemon-container > .stats span {
+    padding: 5px 10px;
+    display: flex;
+    color: #000;
+    font-size: 18px;
+    align-items: center;
+    justify-content: center;
+}
+
+#pokemon-container > .stats .stat-name { 
+    font-weight: bold; 
+    flex: 2;
+}
+
+#pokemon-container > .stats span:first-child { border-bottom: 2px solid #000; }
+#pokemon-container > .stats .stat-value { flex: 1; }
+/* Pokemon Page CSS End */
+
 /* CSS for < 1080px Width */
 @media only screen and (max-width: 1079px) {
     body#generation > .wrapper {
@@ -372,6 +461,11 @@ nav li.selected > a {
     .main-container {
         width: 40%;
         margin: 15px auto;
+    }
+
+    #pokemon-container.wrapper {
+        width: 100%;
+        padding: 15px 1%;
     }
 }
 
@@ -455,4 +549,33 @@ nav li.selected > a {
         transition: background 1s ease-in-out;
     }
     /* Generation Page CSS End */
+
+    /* Pokemon Page CSS Start */
+    #pokemon-container.wrapper { padding: 10px 1%; }
+    #pokemon-container > * { margin-bottom: 15px; }
+    #pokemon-container > h1 { font-size: 22px; }
+    #pokemon-container > p { font-size: 14px; }
+    #pokemon-container > .additional-info > span { font-size: 14px; }
+    #pokemon-container > .additional-info small { font-size: 12px; }
+
+    #pokemon-container > .stats > h2 {
+        margin-bottom: 10px;
+        font-size: 18px;
+    }
+
+    #pokemon-container > .stats > ul {
+        display: inline-flex;
+        flex-direction: column;
+    }
+    
+    #pokemon-container > .stats li { 
+        border-right: none;
+        border-bottom: 2px solid #000;
+        flex: 0; 
+    }
+
+    #pokemon-container > .stats span { font-size: 14px; }
+    #pokemon-container > .stats li:last-child { border-bottom: none; }
+    #pokemon-container > .stats span:first-child { border-bottom: none; }
+    /* Pokemon Page CSS End */
 }
