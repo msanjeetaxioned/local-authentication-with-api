@@ -382,6 +382,7 @@ nav li.selected > a {
     color: #000;
     font-size: 28px;
     font-weight: bold;
+    text-transform: capitalize;
 }
 
 #pokemon-container img {
@@ -401,6 +402,7 @@ nav li.selected > a {
     display: block;
     color: #000;
     font-size: 18px;
+    text-transform: capitalize;
 }
 
 #pokemon-container > .additional-info small {
