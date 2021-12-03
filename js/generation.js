@@ -23,8 +23,15 @@ document.addEventListener('DOMContentLoaded', function(event) {
         const signOut = headerContent.querySelector("a");
         const generationsLis = pokedexMainContainer.querySelectorAll("nav li");
         const h1 = pokedexMainContainer.querySelector("h1");
+        const hamburgerMobile = body.querySelector(".hamburger-mobile");
+        const generationNavUl = body.querySelector(".generation-nav > ul");
 
         usernameInHeader.innerText = "Hello! " + localStorage.getItem("user-name");
+
+        hamburgerMobile.addEventListener("click", function() {
+            generationNavUl.classList.toggle("display-block-for-mobile-only");
+        });
+
         signOut.addEventListener("click", function() {
             localStorage.removeItem("user-name");
             window.location.replace("http://127.0.0.1:5500/login.html");
