@@ -104,7 +104,7 @@ document.addEventListener('DOMContentLoaded', function(event) {
         else {
             start = generations[gen-1] + 1;
         }
-        let end = generations[gen], totalPokemons = end - start;
+        let end = generations[gen], totalPokemons = end - start + 1;
         let ajaxCount = 0;
 
         for(let i = start; i <= end; i++) {
@@ -146,8 +146,8 @@ document.addEventListener('DOMContentLoaded', function(event) {
             li.classList.add(results[i].type);
             li.addEventListener("click", function() {
                 const clickedPokemonId = parseInt(this.getAttribute("data-number"));
-                localStorage.setItem("pokemon-id", clickedPokemonId);
-                console.log(localStorage.getItem("pokemon-id"));
+                sessionStorage.setItem("pokemon-id", clickedPokemonId);
+                window.location.href = "http://127.0.0.1:5500/pokemon.html";
             });
             const {name, id, type, front_image} = results[i];
             const html = `
