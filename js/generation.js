@@ -7,7 +7,10 @@ document.addEventListener('DOMContentLoaded', function(event) {
 
     // Carousel Items
     const totalItems = 6;
-    let currentItem = 0;
+    let currentItem = 1;
+
+    let carouselUl ;
+    let liList;
 
     // Check If Some User is already Logged in
     if(localStorage.getItem("user-name")) {
@@ -67,30 +70,28 @@ document.addEventListener('DOMContentLoaded', function(event) {
 
         const previousButton = pokedexMainContainer.querySelector(".previous-button");
         const nextButton = pokedexMainContainer.querySelector(".next-button");
-        const ul = pokedexMainContainer.querySelector(".carousel > ul");
-        const liList = pokedexMainContainer.querySelectorAll(".carousel li");
         const carouselDotsArray = pokedexMainContainer.querySelectorAll(".carousel-buttons span");
 
         document.addEventListener("keydown", function(event) {
             if(event.key === "ArrowLeft") {
-                changeDisplayedItem(ul, liList, carouselDotsArray, true, -1);
+                changeDisplayedItem(true, -1);
             }
             else if(event.key === "ArrowRight") {
-                changeDisplayedItem(ul, liList, carouselDotsArray, true, 1);
+                changeDisplayedItem(true, 1);
             }
         })
 
         previousButton.addEventListener("click", function() {
-            changeDisplayedItem(ul, liList, carouselDotsArray, true, -1);
+            changeDisplayedItem(true, -1);
         });
 
         nextButton.addEventListener("click", function() {
-            changeDisplayedItem(ul, liList, carouselDotsArray, true, 1);
+            changeDisplayedItem(true, 1);
         });
 
         for(let carouselDot of carouselDotsArray) {
             carouselDot.addEventListener("click", function() {
-                changeDisplayedItem(ul, liList, carouselDotsArray, false, parseInt(this.getAttribute("data-id")));
+                changeDisplayedItem(false, parseInt(this.getAttribute("data-id")));
             });
         }
 
@@ -143,8 +144,7 @@ document.addEventListener('DOMContentLoaded', function(event) {
         let carousel = pokedexMainContainer.querySelector(".carousel");
         let carouselButtons = pokedexMainContainer.querySelector(".carousel-buttons");
         let ul = pokedexMainContainer.querySelector(".pokemons");
-        let carouselUl = carousel.querySelector("ul");
-        let liList = carouselUl.querySelectorAll("li");
+        liList = pokedexMainContainer.querySelectorAll(".carousel li");
         ul.innerHTML = "";
 
         for(let i = start; i <= end; i++) {
@@ -169,57 +169,71 @@ document.addEventListener('DOMContentLoaded', function(event) {
 
         ul.classList.remove("display-none");
         carousel.classList.remove("display-none");
+        carouselUl.scrollLeft = liList[currentItem].offsetLeft;
         carouselButtons.classList.remove("display-none");
-
-        // carouselUl.appendChild(liList[0].cloneNode(true));
-        // carouselUl.insertBefore(liList[liList.length-1].cloneNode(true), liList[0]);
     }
 
     function setImagesOfCarousel(start) {
-        const liList = pokedexMainContainer.querySelectorAll(".carousel li");
+        carouselUl = pokedexMainContainer.querySelector(".carousel > ul");
+        liList = pokedexMainContainer.querySelectorAll(".carousel li");
         for(let li of liList) {
             let img = li.querySelector("img");
             img.setAttribute("src", results[start++].front_image);
         }
-        
+        let copyOfFirstElement = liList[0].cloneNode(true);
+        let copyOfLastElement = liList[liList.length-1].cloneNode(true);
+
+        carouselUl.prepend(copyOfLastElement);
+        carouselUl.append(copyOfFirstElement);
     }
 
-    function changeDisplayedItem(ul, liList, carouselDotsArray,onNextPrevClick, number) {
+    function changeDisplayedItem(onNextPrevClick, number) {
+        const carouselDotsArray = pokedexMainContainer.querySelectorAll(".carousel-buttons span");
+
         liList[currentItem].classList.remove("selected");
-        carouselDotsArray[currentItem].classList.remove("selected");
+        carouselDotsArray[currentItem-1].classList.remove("selected");
         if(onNextPrevClick) {
-            if(currentItem == 0 && number == -1) {
-                currentItem = totalItems - 1;
+            if(currentItem == 1 && number == -1) {
+                currentItem = totalItems;
+                horizontalScrollToElement(carouselUl, liList[0].offsetLeft, 400, true);
             }
-            else if(currentItem == (totalItems-1) && number == 1) {
-                currentItem = 0;
+            else if((currentItem == totalItems) && (number == 1)) {
+                currentItem = 1;
+                horizontalScrollToElement(carouselUl, liList[liList.length-1].offsetLeft, 400, true);
             }
             else {
                 currentItem = currentItem + number;
+                horizontalScrollToElement(carouselUl, liList[currentItem].offsetLeft, 400);
             }
         }
         else {
             currentItem = number;
+            horizontalScrollToElement(carouselUl, liList[currentItem].offsetLeft, 400);
         }
         liList[currentItem].classList.add("selected");
-        carouselDotsArray[currentItem].classList.add("selected");
-        horizontalScrollToElement(ul, liList[currentItem].offsetLeft, 400);
+        carouselDotsArray[currentItem-1].classList.add("selected");
     }
 
-    function horizontalScrollToElement(scrollLayer, destination, duration) {
+    function horizontalScrollToElement(scrollLayer, destination, duration, callback) {
         if (duration <= 0) {
+            if(callback) {
+                carouselUl.scrollLeft = liList[currentItem].offsetLeft;
+            }
             return;
         }
-        const difference = destination - scrollLayer.scrollLeft - 50;
+        const difference = destination - scrollLayer.scrollLeft;
         const perTick = (difference / duration) * 10;
     
         let timeout = setTimeout(function() {
             scrollLayer.scrollLeft = scrollLayer.scrollLeft + perTick;
             if (scrollLayer.scrollLeft === destination) {
                 clearTimeout(timeout);
+                if(callback) {
+                    carouselUl.scrollLeft = liList[currentItem].offsetLeft;
+                }
                 return;
             }
-            horizontalScrollToElement(scrollLayer, destination, duration - 10);
+            horizontalScrollToElement(scrollLayer, destination, duration - 10, callback);
         }, 10);
     }
 });
