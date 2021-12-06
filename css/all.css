@@ -23,7 +23,7 @@ a {
 .display-none { display: none; }
 
 .round { 
-    width: 100%;
+    width: 120px;
     height: 120px;
     border-radius: 50%;
     margin-bottom: 20px;
@@ -50,6 +50,7 @@ a {
     font-weight: bold;
     letter-spacing: 1px;
     text-transform: capitalize;
+    word-break: break-word;
 }
 
 .pokemon-info-class { 
@@ -504,6 +505,7 @@ body#pokemon {
 
     /* Generation Page CSS Start */
     .round { 
+        width: 100px;
         height: 100px;
         margin-bottom: 10px;
     }
@@ -567,6 +569,7 @@ body#pokemon {
     }
 
     #pokedex-main-container > .pokemons > li {
+        max-width: 110px;
         padding: 5px;
         border-radius: 8px;
         box-shadow: 0 2px 5px rgba(100, 100, 100, 0.5);
