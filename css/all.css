@@ -381,7 +381,7 @@ body#pokemon {
 #pokemon-container > *:last-child { margin-bottom: 0; }
 
 #pokemon-container > h1 {
-    color: rgba(34, 95, 171, 1);
+    color: #000;
     font-size: 28px;
     font-weight: bold;
     text-transform: capitalize;
