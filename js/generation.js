@@ -16,6 +16,7 @@ document.addEventListener('DOMContentLoaded', function(event) {
     if(localStorage.getItem("user-name")) {
         if(sessionStorage.getItem("generation")) {
             gen = parseInt(sessionStorage.getItem("generation")) - 1;
+            document.title = `Generation ${sessionStorage.getItem("generation")}`;
             sessionStorage.removeItem("generation");
         }
         userhasLoggedIn();
@@ -58,6 +59,7 @@ document.addEventListener('DOMContentLoaded', function(event) {
                     generationsLis[gen].classList.remove("selected");
                     generationsLis[genClicked].classList.add("selected");
                     gen = genClicked;
+                    document.title = `Generation ${genClicked+1}`;
                     changeGenerationHeading(h1);
                     if(results[generations[genClicked]]) {
                         let start;

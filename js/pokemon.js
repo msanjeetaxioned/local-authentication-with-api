@@ -56,13 +56,13 @@ document.addEventListener('DOMContentLoaded', (event) => {
         body.className = "";
         body.classList.add(pokemonData.types[0]);
 
-        let h1 = pokemonContainer.querySelector("h1");
+        let pokemonName = pokemonContainer.querySelector(".poke-name");
         let img = pokemonContainer.querySelector("figure > img");
-        let pokedexNumber = pokemonContainer.querySelector("p");
+        let pokedexNumber = pokemonContainer.querySelector(".pokedex-number");
         let additionalInfos = pokemonContainer.querySelectorAll(".additional-info > span");
         let statsValues = pokemonContainer.querySelectorAll(".stats .stat-value");
 
-        h1.innerText = pokemonData.name;
+        pokemonName.innerText = pokemonData.name;
         img.setAttribute("src", pokemonData.front_image);
         pokedexNumber.innerText = `#00${pokemonData.id}`;
         if(pokemonData.types.length > 1) {
