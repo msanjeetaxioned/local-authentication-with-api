@@ -380,8 +380,8 @@ body#pokemon {
 #pokemon-container > * { margin-bottom: 20px; }
 #pokemon-container > *:last-child { margin-bottom: 0; }
 
-#pokemon-container > h1 {
-    color: rgba(34, 95, 171, 1);
+#pokemon-container > .poke-name {
+    color: #000;
     font-size: 28px;
     font-weight: bold;
     text-transform: capitalize;
@@ -581,7 +581,7 @@ body#pokemon {
     /* Pokemon Page CSS Start */
     #pokemon-container.wrapper { padding: 10px 1%; }
     #pokemon-container > * { margin-bottom: 15px; }
-    #pokemon-container > h1 { font-size: 22px; }
+    #pokemon-container > .poke-name { font-size: 22px; }
     #pokemon-container > p { font-size: 14px; }
     #pokemon-container > .additional-info > span { font-size: 14px; }
     #pokemon-container > .additional-info small { font-size: 12px; }
