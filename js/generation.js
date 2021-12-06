@@ -33,6 +33,11 @@ document.addEventListener('DOMContentLoaded', function(event) {
         const hamburgerMobile = body.querySelector(".hamburger-mobile");
         const generationNavUl = body.querySelector(".generation-nav > ul");
 
+        if(gen != 0) {
+            generationsLis[0].classList.remove("selected");
+            generationsLis[gen].classList.add("selected");
+        }
+
         usernameInHeader.innerText = "Hello! " + localStorage.getItem("user-name");
 
         hamburgerMobile.addEventListener("click", function() {
