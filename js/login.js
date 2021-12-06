@@ -17,7 +17,7 @@ document.addEventListener('DOMContentLoaded', function(event) {
 
     let formSubmittedOnce = false;
 
-    // Check If Some User is already Logged in
+    // Check If Some User has already Logged in
     if(localStorage.getItem("user-name")) {
         window.location.replace("http://127.0.0.1:5500/generation.html");
     }
@@ -78,5 +78,4 @@ document.addEventListener('DOMContentLoaded', function(event) {
         spanErrorMessage.innerText = errors[1];
         return false;
     }
-
 });

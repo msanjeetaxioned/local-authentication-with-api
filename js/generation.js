@@ -9,11 +9,15 @@ document.addEventListener('DOMContentLoaded', function(event) {
     const totalItems = 6;
     let currentItem = 1;
 
-    let carouselUl ;
+    let carouselUl;
     let liList;
 
-    // Check If Some User is already Logged in
+    // Check If Some User has already Logged in
     if(localStorage.getItem("user-name")) {
+        if(sessionStorage.getItem("generation")) {
+            gen = parseInt(sessionStorage.getItem("generation")) - 1;
+            sessionStorage.removeItem("generation");
+        }
         userhasLoggedIn();
     }
     else {
@@ -59,6 +63,7 @@ document.addEventListener('DOMContentLoaded', function(event) {
                             start = generations[gen-1] + 1;
                         }
                         let end = generations[gen];
+                        setImagesOfCarousel(start)
                         displayData(start, end, pokedexMainContainer);
                     }
                     else {
@@ -154,6 +159,7 @@ document.addEventListener('DOMContentLoaded', function(event) {
             li.addEventListener("click", function() {
                 const clickedPokemonId = parseInt(this.getAttribute("data-number"));
                 sessionStorage.setItem("pokemon-id", clickedPokemonId);
+                sessionStorage.setItem("generation", (gen+1));
                 window.location.href = "http://127.0.0.1:5500/pokemon.html";
             });
             const {name, id, type, front_image} = results[i];
@@ -175,6 +181,11 @@ document.addEventListener('DOMContentLoaded', function(event) {
 
     function setImagesOfCarousel(start) {
         carouselUl = pokedexMainContainer.querySelector(".carousel > ul");
+        liList = pokedexMainContainer.querySelectorAll(".carousel li");
+        if(liList.length > totalItems) {
+            carouselUl.removeChild(liList[0]);
+            carouselUl.removeChild(liList[liList.length-1]);
+        }
         liList = pokedexMainContainer.querySelectorAll(".carousel li");
         for(let li of liList) {
             let img = li.querySelector("img");
@@ -216,6 +227,7 @@ document.addEventListener('DOMContentLoaded', function(event) {
 
     function horizontalScrollToElement(scrollLayer, destination, duration, callback) {
         if (duration <= 0) {
+            // Scroll instantly back to the real element after going to duplicate
             if(callback) {
                 carouselUl.scrollLeft = liList[currentItem].offsetLeft;
             }
@@ -228,6 +240,7 @@ document.addEventListener('DOMContentLoaded', function(event) {
             scrollLayer.scrollLeft = scrollLayer.scrollLeft + perTick;
             if (scrollLayer.scrollLeft === destination) {
                 clearTimeout(timeout);
+                // Scroll instantly back to the real element after going to duplicate
                 if(callback) {
                     carouselUl.scrollLeft = liList[currentItem].offsetLeft;
                 }
