@@ -59,10 +59,7 @@ a {
     text-transform: capitalize;
 }
 
-body#pokemon {
-    width: 100%;
-    min-height: 100vh;
-}
+body#pokemon { width: 100%; }
 
 #pokemon-container.wrapper {
     max-width: 760px;
